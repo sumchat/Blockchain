@@ -28,17 +28,17 @@ Note:  Generators are usually run using the globally-installed `sails` CLI (comm
 -->
 
 ##   Environment Requirements
-Node version used: 10.7.0
-Npm version: 6.2.0
-Node JS Framework used: Sails
++   Node version used: 10.7.0
++   Npm version: 6.2.0
++   Node JS Framework used: Sails
 
 ##  Install instructions
-Create a project folder Project-3
-Download or clone the repository myRestApp inside this folder.
-cd to the myRestApp
-Install the requirements from the included package.json file using: npm install
-Use the command Sails lift in Node.js command prompt to launch the application at http://localhost:8000
-A folder chainDB will be created under Project-3 folder. It will be used to store the levelDB database.
+
++   Download or clone the repository Blockchain.
++   cd to the WebServices\myRestApp
++   Install the requirements from the included package.json file using: npm install
++   Use the command Sails lift in Node.js command prompt to launch the application at http://localhost:8000
++   A folder chainDB will be created under Project-3 folder. It will be used to store the levelDB database.
 
 ##  External Libraries used
 The application uses Leveldb as database to store the blocks and crypto-js to generate the hash for the block.
