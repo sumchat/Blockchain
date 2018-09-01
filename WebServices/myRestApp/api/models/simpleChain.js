@@ -52,8 +52,8 @@ const readstream = () => new Promise((resolve,reject) => {
 
 			async readChainData(){
 				try{
-				var results = await readstream();
-				var output = [];
+				let results = await readstream();
+				let output = [];
 				output = results;
 				console.log("length " + output.length);
 				 var self = this;
@@ -80,7 +80,7 @@ const readstream = () => new Promise((resolve,reject) => {
 
 		  async  addLevelDBData(newBlock){
 		   try{
-				var key = this.chain.length;
+				let key = this.chain.length;
 				//console.log("chain length " + key);
 				newBlock.height = key;
 		    // UTC timestamp
@@ -92,11 +92,11 @@ const readstream = () => new Promise((resolve,reject) => {
 		    // Block hash with SHA256 using newBlock and converting to a string
 		    newBlock.hash = SHA256(JSON.stringify(newBlock)).toString();
 
-				var blkval = JSON.stringify(newBlock);
+				let blkval = JSON.stringify(newBlock);
 
-				 var resp = await db.put(key, blkval);
-					var val = await db.get(key);
-					var obj = JSON.parse(val);
+				 let resp = await db.put(key, blkval);
+					let val = await db.get(key);
+					let obj = JSON.parse(val);
 					 this.chain.push(obj);
 					 //console.log("pushed "+ key);
 				 this.processing = false;
@@ -112,7 +112,7 @@ const readstream = () => new Promise((resolve,reject) => {
 		
 		if(this.tempArray.length > 0){
 			//console.log("process .." + this.tempArray.length);
-			var nextBlock = this.tempArray[0];
+			let nextBlock = this.tempArray[0];
 			this.processing = true;
 			await this.addLevelDBData(nextBlock);
 			

@@ -41,8 +41,8 @@ module.exports = {
                  data: req.param("data"),
              };
             await blockchain.addBlock(block);
-            var blkheight = blockchain.getBlockHeight();
-	        var newblock = blockchain.getBlock(blkheight);
+            let blkheight = blockchain.getBlockHeight();
+	        let newblock = blockchain.getBlock(blkheight);
             return res.ok(newblock);
         }
         catch(error)
