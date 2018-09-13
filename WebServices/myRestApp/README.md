@@ -56,11 +56,14 @@ a) Configure Blockchain ID validation routine. This routine will     allow users
    This timestamp is used to time wall the user request for star registration.After submitting a request, the user will receive a response in JSON format with a message to sign.
    In the event the time expires, the address is removed from the validation routine forcing the user to restart the process.
    URL
-   This functionality is made available at the following URL.
+   This functionality is made available at the following URL.      
+
 
    http://localhost:8000/requestValidation
 
-    ![requestValidation](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/requestValidation1.jpg)
+   ![requestValidation](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/requestValidation1.jpg)
+
+    
 
 b) After receiving the response, users will prove their blockchain identity by signing a message with their wallet. Once they sign this message, the application will validate        their request and grant access to register a star.
 
