@@ -84,6 +84,8 @@ b) After receiving the response, users will prove their blockchain identity by s
 
 c) POST /block: http://localhost:8000/block
 
+ ![signatureValidation](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/signatureValidate.jpg)
+
    Post a new block with following  payload  to add  to the block body. 
     *  
     *   The response for the endpoint  provides block object in JSON format e.g.   
@@ -96,9 +98,12 @@ c) POST /block: http://localhost:8000/block
     magnitude [optional]
     constellation [optional]
     star_story [Hex encoded Ascii string limited to 250 words/500 bytes]
-    
-    ![My image](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/block_post.jpg)
-     ![header](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/block_post_header.jpg)
+
+ ![post](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/block_post.jpg)
+
+ ![header](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/block_post_header.jpg)
+  
+ 
 
 d) Configure Star Lookup
 
