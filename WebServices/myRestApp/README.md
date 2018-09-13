@@ -83,9 +83,7 @@ b) After receiving the response, users will prove their blockchain identity by s
    ![signatureValidation](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/signatureValidate.jpg)
 
 c) POST /block: http://localhost:8000/block
-
- ![signatureValidation](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/signatureValidate.jpg)
-
+ 
    Post a new block with following  payload  to add  to the block body. 
     *  
     *   The response for the endpoint  provides block object in JSON format e.g.   
