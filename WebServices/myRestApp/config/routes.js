@@ -37,7 +37,11 @@ module.exports.routes = {
   "GET /csrfToken": { action: "security/grant-csrf-token" },
   
    
-  'GET /block/:id':       { controller:"BlockController", action: "getBlock"},
+  //'GET /block/:id':       { controller:"BlockController", action: "getBlock"},
+
+  'GET /stars/hash::hash':       { controller:"SearchController", action: "searchHash"},
+  'GET /stars/Address::Address':       { controller:"SearchController", action: "searchAddress"},
+  'GET /block/:height':       { controller:"SearchController", action: "searchHeight"},
 
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
@@ -55,8 +59,10 @@ module.exports.routes = {
   'POST  /api/v1/deliver-contact-form-message':          { action: 'deliver-contact-form-message' },
 
   'POST  /block':                                         { controller:"BlockController", action: "addBlock"},
-
-  //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
+   'POST /requestValidation':                           { controller:"ValidateController", action: "requestValidation"},
+   'POST /message-signature/validate':                  {controller:"MessageSignatureController", action:"validate"},
+  
+   //  ╦ ╦╔═╗╔╗ ╦ ╦╔═╗╔═╗╦╔═╔═╗
   //  ║║║║╣ ╠╩╗╠═╣║ ║║ ║╠╩╗╚═╗
   //  ╚╩╝╚═╝╚═╝╩ ╩╚═╝╚═╝╩ ╩╚═╝
 

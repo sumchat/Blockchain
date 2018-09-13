@@ -6,7 +6,7 @@ const SHA256 = require('crypto-js/sha256');
 const chainDB = '../chaindata';
 const db = level(chainDB);
 
-
+let BlockchainData = require('../models/BlockchainData.js'); 
 /* ===== Block Class ==============================
 |  Class with a constructor for block 			   |
 |  ===============================================*/
@@ -52,6 +52,11 @@ const readstream = () => new Promise((resolve,reject) => {
 
 			async readChainData(){
 				try{
+					//self.chain =	;
+					this.chain = BlockchainData.chain;
+				if(this.chain.length == 0)
+				{
+					
 				let results = await readstream();
 				let output = [];
 				output = results;
@@ -60,7 +65,7 @@ const readstream = () => new Promise((resolve,reject) => {
 				 output.sort(function(a,b){return a.key - b.key});
 				 output.forEach(function(obj){
 						 var blockObj = JSON.parse(obj.value);
-					//console.log("added to chain");	 
+						 
 					 self.chain.push(blockObj);
 					 
 					 });
@@ -73,6 +78,9 @@ const readstream = () => new Promise((resolve,reject) => {
 				  		}
 
 					}
+					console.log("length of chain in blockchaindata " + BlockchainData.chain.length);
+					
+				}
 				catch(err){
 					console.log("Error occurred while reading chainData "+ err);
 			 	}
@@ -152,7 +160,9 @@ const readstream = () => new Promise((resolve,reject) => {
 				}
 				else
 	      return JSON.parse(JSON.stringify(this.chain[blockHeight]));
-	    }
+			}
+			
+
 
 	    // validate block
 	    validateBlock(blockHeight){
