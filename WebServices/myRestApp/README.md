@@ -60,11 +60,11 @@ a) Configure Blockchain ID validation routine. This routine will     allow users
 
    http://localhost:8000/requestValidation
 
-    ![requestValidation](https://github.com/sumchat/Blockchain/img/requestValidation1.jpg)
+    ![requestValidation](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/requestValidation1.jpg)
 
 b) After receiving the response, users will prove their blockchain identity by signing a message with their wallet. Once they sign this message, the application will validate        their request and grant access to register a star.
 
-  ![signature](https://github.com/sumchat/Blockchain/img/signature.jpg)
+  ![signature](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/signature.jpg)
 
    URL
    This functionality is provided at the following URL.
@@ -77,7 +77,7 @@ b) After receiving the response, users will prove their blockchain identity by s
    Wallet address
    Message signature
 
-   ![signatureValidation](https://github.com/sumchat/Blockchain/img/requestValidation1.jpg)
+   ![signatureValidation](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/signatureValidate.jpg)
 
 c) POST /block: http://localhost:8000/block
 
@@ -94,8 +94,8 @@ c) POST /block: http://localhost:8000/block
     constellation [optional]
     star_story [Hex encoded Ascii string limited to 250 words/500 bytes]
     
-    ![My image](https://github.com/sumchat/Blockchain/img/block_post.jpg)
-     ![header](https://github.com/sumchat/Blockchain/img/block_post_header.jpg)
+    ![My image](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/block_post.jpg)
+     ![header](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/block_post_header.jpg)
 
 d) Configure Star Lookup
 
