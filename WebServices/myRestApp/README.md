@@ -107,12 +107,13 @@ d) Configure Star Lookup
 
     i) GET /block/:id: http://localhost:8000/block/{BLOCK_HEIGHT}
 
-   GET request using URL path with a block height parameter.
-    *   URL path should resemble: http://localhost:8000/block/0
-    *   '0' within the URL path is the block height. 
-    *   The response for the endpoint will provide block object in JSON format.
-    e.g Example: Block Height 0 -> http://localhost:8000/block/0
-    Response Output:
+        GET request using URL path with a block height parameter.
+        *   URL path should resemble: http://localhost:8000/block/0
+        *   '0' within the URL path is the block height. 
+        *   The response for the endpoint will provide block object in JSON format.
+        e.g Example: Block Height 0 -> http://localhost:8000/block/0
+
+        Response Output:
          {
             "hash": "1427f14c3399651c2da024aa9b07311d2c6f45702b2910b4dc699f245c5d0f13",
             "height": 0,
