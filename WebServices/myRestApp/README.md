@@ -113,13 +113,13 @@ d) Configure Star Lookup
     *   The response for the endpoint will provide block object in JSON format.
     e.g Example: Block Height 0 -> http://localhost:8000/block/0
     Response Output:
-    {
-    "hash": "1427f14c3399651c2da024aa9b07311d2c6f45702b2910b4dc699f245c5d0f13",
-    "height": 0,
-    "data": "First block in the chain - Genesis block",
-    "time": "1534608564",
-    "previousBlockHash": ""
-    }
+         {
+            "hash": "1427f14c3399651c2da024aa9b07311d2c6f45702b2910b4dc699f245c5d0f13",
+            "height": 0,
+            "data": "First block in the chain - Genesis block",
+            "time": "1534608564",
+            "previousBlockHash": ""
+         }
 
     ii)GET by Blockchain Wallet Address
 
