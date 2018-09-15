@@ -65,7 +65,7 @@ module.exports = {
                              BlockchainData.validationBlocks[blockchainId] = validationReqBlock;
                             //set a timeout of 5 minutes i.e 5 * 60 * 1000 to remove the request from validation routine if not validated
                             setTimeout(function(){
-                            delete BlockchainData.validationBlocks.blockchainId;
+                                delete BlockchainData.validationBlocks[blockchainId];
                             //BlockchainData.validationBlocks[blockchainId] = null;
                              },300000);
                             //blockchainId + ":" + validationBlock.time +":" + "starRegistry";
