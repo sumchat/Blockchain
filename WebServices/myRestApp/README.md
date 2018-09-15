@@ -51,7 +51,7 @@ GET request at http://localhost:8000/csrfToken
 
 ##  API Endpoints
 
-a) Configure Blockchain ID validation routine. This routine will     allow users to request ownership of a star and validate their     request to grant ownership of a star.The Web API will allow       users to submit their request using their wallet address.The      web API will accept a Blockchain ID (The Blockchain ID is your    wallet address) with a request for star registration.
+a) Configure Blockchain ID validation routine. This routine will     allow users to request ownership of a star and validate their     request to grant ownership of a star.The Web API will allow       users to submit their request using their wallet address.The      web API will accept a Blockchain ID i.e. address (The Blockchain address is your    wallet address) with a request for star registration.
    The users Blockchain ID will be stored with a timestamp.
    This timestamp is used to time wall the user request for star registration.After submitting a request, the user will receive a response in JSON format with a message to sign.
    In the event the time expires, the address is removed from the validation routine forcing the user to restart the process.

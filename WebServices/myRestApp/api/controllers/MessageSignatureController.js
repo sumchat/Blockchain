@@ -20,7 +20,7 @@ module.exports = {
             let body = req.body;
              let walletAddress = body.address;//req.param("WalletAddress");
              let signature = body.signature;//req.param("MessageSignature");
-             let time = new Date().getTime().toString().slice(0,-3);
+             let time = Math.floor(Date.now() / 1000);//time in secondsnew Date().getTime().toString().slice(0,-3);
              let respObj = {};
              let emptyFields = [];
              if (!walletAddress) 
@@ -50,49 +50,47 @@ module.exports = {
                      if (walletAddress in BlockchainData.validationBlocks)//if the user has made the initial request
                         {
                             console.log("wallet:" + BlockchainData.validationBlocks[walletAddress]);
-                            if (BlockchainData.validatedRequest.includes(walletAddress))
-                                respObj.message = "The signature of this address is already verified. Please validate it again"
-                            else{
+                            // if (BlockchainData.validatedRequest.includes(walletAddress))
+                            //     respObj.message = "The signature of this address is already verified. Please validate it again"
+                            // else{
                                 //validate signature
                                 let validateBlock = BlockchainData.validationBlocks[walletAddress];
                                 let message = validateBlock.message;
                                 let isVerified = bitcoinMessage.verify(message,walletAddress,signature);
                                 if(isVerified)
                                  {
-                                 BlockchainData.validatedRequest.push(walletAddress);
-                                //now send the response
-                                //let respObj = {};
-                                respObj.registerStar = "true";
-                                let status = 
-                                  { address: validateBlock.userId,
-                                    requestTimeStamp: validateBlock.timeStamp,
+                                    BlockchainData.validated.push(walletAddress);
+                                    //now send the response
+                                    //let respObj = {};
+                                    respObj.registerStar = "true";
+                                    let status = 
+                                     { address: validateBlock.userId,
+                                     requestTimeStamp: validateBlock.timeStamp,
                                      message: validateBlock.userId + ":" + validateBlock.timeStamp + ":starRegistry",
-                                     validationWindow: 300000 - (time - validateBlock.timeStamp),
+                                     validationWindow: 300 - (time - validateBlock.timeStamp),
                                     messageSignature: "valid"
                                     }
                                 respObj.status = status;
                                 }
-                             else{
-                                 //let respObj = {};
-                                 respObj.registerStar = "false";
+                                else{
+                                    //let respObj = {};
+                                    respObj.registerStar = "false";
                                     let status = 
                                          {address: validateBlock.userId,
                                           requestTimeStamp: validateBlock.timeStamp,
                                           message: validateBlock.userId + ":" + validateBlock.timeStamp + ":starRegistry",
-                                         validationWindow: 300000 - (time - validateBlock.timeStamp),
-                                         messageSignature: "invalid"
+                                          validationWindow: 300 - (time - validateBlock.timeStamp),
+                                          messageSignature: "invalid"
                                          }
-                                 respObj.status = status;
+                                    respObj.status = status;
 
-                                 }
-                                }
-                 
-                
-                         }
-                         else{
+                                    }
+                            }              
+                         
+                        else{
                                 // need to try again as the validation window may have expired
                 
-                                 respObj.message = "Record not found. Please initiate the validateRequest again from the beginning";                    
+                                 respObj.message = "Record not found.Validation window may have expired. Please initiate the validateRequest again from the beginning";                    
                      
                              }
                      }

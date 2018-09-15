@@ -42,7 +42,7 @@ module.exports = {
            let address = body.address;//req.param("WalletAddress");
            let star = body.star;
            if (!address)
-            return res.ok("{Error:No values supplied for WalletAddress}");
+            return res.ok("{Error:No values supplied for address}");
            if (BlockchainData.validated.includes(address)){
                 //if (address in validateBlockContainer.validated){
                 //let star = req.param("star");
@@ -51,13 +51,13 @@ module.exports = {
                 //check for star properties
                 let emptyFields = [];
                 if (!address) 
-                emptyFields.push("WalletAddress");
+                emptyFields.push("address");
             
-                if (!star.right_ascension) 
-                emptyFields.push("right_ascension");
+                if (!star.ra) 
+                emptyFields.push("right_ascension(ra)");
             
-                if (!star.declination)
-                emptyFields.push("declination");
+                if (!star.dec)
+                emptyFields.push("declination(dec)");
 
                 if (!star.story)
                 emptyFields.push("story");
@@ -85,6 +85,7 @@ module.exports = {
                      let blkheight = blockchain.getBlockHeight();
                     let newblock = blockchain.getBlock(blkheight);
                     BlockchainData.validated.pop(address); //user can request one star for each validation request
+                    delete BlockchainData.validationBlocks[address];
                     return res.ok(newblock);
                  }
              }
