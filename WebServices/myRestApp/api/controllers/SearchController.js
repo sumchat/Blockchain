@@ -9,6 +9,7 @@ const Blockchain = require('../models/simpleChain.js');
 
 module.exports = {
     searchAddress: async function(req,res){
+        //let body = req.body;
         let walletAddress = req.param("Address");
         console.log("address "+ walletAddress);
         try{  

@@ -37,12 +37,15 @@ module.exports = {
   addBlock:async function(req,res){
       try{
 
-           let address = req.param("WalletAddress");
+        let body = req.body;
+
+           let address = body.address;//req.param("WalletAddress");
+           let star = body.star;
            if (!address)
             return res.ok("{Error:No values supplied for WalletAddress}");
            if (BlockchainData.validated.includes(address)){
                 //if (address in validateBlockContainer.validated){
-                let star = req.param("star");
+                //let star = req.param("star");
                 if (!star)
                 return res.ok("{Error:No values supplied for Star }");
                 //check for star properties

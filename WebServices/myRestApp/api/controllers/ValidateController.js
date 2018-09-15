@@ -14,7 +14,9 @@ module.exports = {
      */
     requestValidation: async function(req,res){
         try{
-             let blockchainId = req.param("BlockchainId");
+             let body = req.body;//req.param("BlockchainId");
+             let blockchainId = body.address;
+             console.log("chainid:" + blockchainId);
              let time = new Date().getTime().toString().slice(0,-3);
              //check if the request is already there or not
             
@@ -81,7 +83,7 @@ module.exports = {
              
             }
             else{
-                    return res.ok("{Error: No values supplied for BlockchainId}");
+                    return res.ok("{Error: No values supplied for address}");
                  }
             }
         catch(error)

@@ -17,17 +17,18 @@ module.exports = {
      */
     validate: async function(req,res){
         try{
-             let walletAddress = req.param("WalletAddress");
-             let signature = req.param("MessageSignature");
+            let body = req.body;
+             let walletAddress = body.address;//req.param("WalletAddress");
+             let signature = body.signature;//req.param("MessageSignature");
              let time = new Date().getTime().toString().slice(0,-3);
              let respObj = {};
              let emptyFields = [];
              if (!walletAddress) 
-             emptyFields.push("WalletAddress");           
+             emptyFields.push("address");           
              
              
              if (!signature)
-             emptyFields.push("MessageSignature");
+             emptyFields.push("signature");
  
              
             
