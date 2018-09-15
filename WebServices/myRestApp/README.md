@@ -118,7 +118,7 @@ c) POST /block: http://localhost:8000/block
 
    Response:
 
- ![header](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/block_post_response.jpg)
+ ![response](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/block_post_response.jpg)
   
  
 
@@ -144,6 +144,8 @@ d) Configure Star Lookup
     ii)GET by Blockchain Wallet Address
 
      http://localhost:8000/stars/address:[ADDRESS]
+
+ ![search](https://github.com/sumchat/Blockchain/blob/WebServices/WebServices/myRestApp/img/addressSearch.jpg)
 
     iii) GET by Star Block Hash
     
