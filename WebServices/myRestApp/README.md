@@ -84,7 +84,7 @@ b) After receiving the response, users will prove their blockchain identity by s
 
 c) POST /block: http://localhost:8000/block
  
-   Post a new block with following  payload  to add  to the block body. 
+   Post a new block with following  payload  to add  to the block body. For each request validated you can register only one star.
     *  
     *   The response for the endpoint  provides block object in JSON format e.g.   
     
