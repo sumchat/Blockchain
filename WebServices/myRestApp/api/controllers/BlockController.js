@@ -38,49 +38,56 @@ module.exports = {
       try{
 
            let address = req.param("WalletAddress");
+           if (!address)
+            return res.ok("{Error:No values supplied for WalletAddress}");
            if (BlockchainData.validated.includes(address)){
-           //if (address in validateBlockContainer.validated){
-            let star = req.param("star");
-            //check for star properties
-            let emptyFields = [];
+                //if (address in validateBlockContainer.validated){
+                let star = req.param("star");
+                if (!star)
+                return res.ok("{Error:No values supplied for Star }");
+                //check for star properties
+                let emptyFields = [];
+                if (!address) 
+                emptyFields.push("WalletAddress");
             
-            if (!star.right_ascension) 
-            emptyFields.push("right_ascension");
+                if (!star.right_ascension) 
+                emptyFields.push("right_ascension");
             
-            if (!star.declination)
-            emptyFields.push("declination");
+                if (!star.declination)
+                emptyFields.push("declination");
 
-            if (!star.story)
-            emptyFields.push("story");
+                if (!star.story)
+                emptyFields.push("story");
            
-            if(emptyFields.length > 0)
-            {
-                const missingfields = emptyFields.join();
-                errorStr = "Request failed because no values were supplied for - " + missingfields;
-                return res.ok("error:" + errorStr );
+                if(emptyFields.length > 0)
+                {
+                    const missingfields = emptyFields.join();
+                    errorStr = "Request failed because no values were supplied for - " + missingfields;
+                 return res.ok("error:" + errorStr );
                   
-            }
-            else{
-            let blockchain = new Blockchain();
-             await blockchain.readChainData();
-             let story = star.story;
-             let hexStory = module.exports.a2hex(story);
-             star.story = hexStory;
-             const block = {
-                  body: {
+                }
+                else{
+                    let blockchain = new Blockchain();
+                    await blockchain.readChainData();
+                     let story = star.story;
+                    let hexStory = module.exports.a2hex(story);
+                    star.story = hexStory;
+                    const block = {
+                    body: {
                       address,
                       star
-                  }
-              };
-             await blockchain.addBlock(block);
-             let blkheight = blockchain.getBlockHeight();
-             let newblock = blockchain.getBlock(blkheight);
-             return res.ok(newblock);
-            }
+                         }
+                     };
+                     await blockchain.addBlock(block);
+                     let blkheight = blockchain.getBlockHeight();
+                    let newblock = blockchain.getBlock(blkheight);
+                    BlockchainData.validated.pop(address); //user can request one star for each validation request
+                    return res.ok(newblock);
+                 }
              }
            else{
             let respObj = {};
-            respObj.message = "Record not found. Please try the validateRequest first"; 
+            respObj.message = "Record not found. Please try the validateRequest first. You can register only one star for each validation"; 
             return res.ok(respObj);
            }  
            

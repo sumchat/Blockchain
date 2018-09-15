@@ -20,10 +20,12 @@ module.exports = {
            
             //search all the blocks except the genesis block because the
             // genesis block does not contain the star object
-            let blocks = blockchain.chain.splice(1);
+            
 
-             block = blocks.filter(block => {
-                    return block["body"]["address"] === walletAddress;
+             block = blockchain.chain.filter(block => {
+                   if (block.body && block.body.address === walletAddress)
+                        return true;
+                   
                 });           
             
             
@@ -62,7 +64,7 @@ module.exports = {
             let blockchain = new Blockchain();
             await blockchain.readChainData();
               
-           if(blockheight <= blockchain.chain.length)
+           if(blockheight < blockchain.chain.length)
             {
                 block = blockchain.chain[blockheight];
                 return res.ok(block);
