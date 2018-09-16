@@ -13,7 +13,7 @@ module.exports = {
         let walletAddress = req.param("Address");
         console.log("address "+ walletAddress);
         try{  
-            let block = null;
+            let blocks = null;
             
             let blockchain = new Blockchain();
             await blockchain.readChainData();            
@@ -23,14 +23,24 @@ module.exports = {
             // genesis block does not contain the star object
             
 
-             block = blockchain.chain.filter(block => {
+             blocks = blockchain.chain.filter(block => {
                    if (block.body && block.body.address === walletAddress)
                         return true;
                    
-                });           
+                });   
+            let allblocks = blocks.map(block =>{
+                    const {body, ...rest} = block;
+                    console.log("story.." + body["star"]["story"]);
+                    body["star"]["storyDecoded"] = module.exports.hex2a(body["star"]["story"]);
+                    return {
+                       ...rest,
+                       body,
+                    };
+                   
+                    });        
             
             
-            return res.ok(block);
+            return res.ok(allblocks);
         }
       catch(error)
         {
@@ -40,18 +50,27 @@ module.exports = {
      searchHash: async function(req,res){
         let blockhash = req.param("hash");
         try{  
-            let block = null;
+            let blocks = null;
             
             let blockchain = new Blockchain();
             await blockchain.readChainData();                
             
-             block = blockchain.chain.filter(block => {
+             blocks = blockchain.chain.filter(block => {
                     return block.hash === blockhash;
                 });                 
-            
-            
-            return res.ok(block);
-        }
+             let allblocks = blocks.map(block =>{
+                 const {body, ...rest} = block;
+                 console.log("story.." + body["star"]["story"]);
+                 body["star"]["storyDecoded"] = module.exports.hex2a(body["star"]["story"]);
+                 return {
+                    ...rest,
+                    body,
+                 };
+                
+                 });
+             
+             return res.ok(allblocks);
+            }
       catch(error)
         {
          return res.serverError(error);
@@ -68,6 +87,7 @@ module.exports = {
            if(blockheight < blockchain.chain.length)
             {
                 block = blockchain.chain[blockheight];
+                block["body"]["star"]["storyDecoded"] = module.exports.hex2a(block["body"]["star"]["story"]);
                 return res.ok(block);
             }
             else
@@ -81,6 +101,14 @@ module.exports = {
          return res.serverError(error);
         }  
      },
+     
+     hex2a:function(hexx) {
+        var hex = hexx.toString();//force conversion
+        var str = '';
+        for (var i = 0; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
+            str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+        return str;
+    }
     
 
 };

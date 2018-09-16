@@ -30,27 +30,41 @@ module.exports = {
                          respObj.message = "This address is already validated. Go ahead and register a star";
                         return res.ok(respObj);
                      }
-                else{             
-                   
-                            //if not then start the initial request
+                else{           
+                        if (blockchainId in BlockchainData.validationBlocks)//if the user has made the initial request
+                         {  
+                            let validateBlock = BlockchainData.validationBlocks[blockchainId];                            
+                            respObj.address= validateBlock.userId;
+                            respObj.requestTimestamp = validateBlock.timeStamp;
+                            respObj.message= validateBlock.userId + ":" + validateBlock.timeStamp + ":starRegistry";
+                            respObj.validationWindow= 300 - (time - validateBlock.timeStamp);
+                            return res.ok(respObj);            
+                                         
+                         }
+                         else{
+                             //if not then start the initial request
                             const validationReqBlock = {
-                            userId: blockchainId,
-                            timeStamp: time,
-                             message:blockchainId + ":" + time + ":starRegistry"
-                             };
+                                userId: blockchainId,
+                                timeStamp: time,
+                                 message:blockchainId + ":" + time + ":starRegistry"
+                                 };
+    
+                                 BlockchainData.validationBlocks[blockchainId] = validationReqBlock;
+                                //set a timeout of 5 minutes i.e 5 * 60 * 1000 to remove the request from validation routine if not validated
+                                setTimeout(function(){
+                                    delete BlockchainData.validationBlocks[blockchainId];                            
+                                 },300000);
+                                
+                 
+                                respObj.address = blockchainId,                            
+                                respObj.requestTimestamp =  validationReqBlock.timeStamp;
+                                respObj.message = validationReqBlock.userId + ":" + validationReqBlock.timeStamp + ":starRegistry";
+                                respObj.validationWindow = 300; //in seconds
+                                return res.ok(respObj);
 
-                             BlockchainData.validationBlocks[blockchainId] = validationReqBlock;
-                            //set a timeout of 5 minutes i.e 5 * 60 * 1000 to remove the request from validation routine if not validated
-                            setTimeout(function(){
-                                delete BlockchainData.validationBlocks[blockchainId];                            
-                             },300000);
+                            }
+                   
                             
-             
-                            respObj.address = blockchainId,                            
-                            respObj.requestTimestamp =  validationReqBlock.timeStamp;
-                            respObj.message = validationReqBlock.userId + ":" + validationReqBlock.timeStamp + ":starRegistry";
-                            respObj.validationWindow = 300; //in seconds
-                            return res.ok(respObj);
                     }
                        
                

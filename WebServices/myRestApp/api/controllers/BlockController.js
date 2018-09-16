@@ -72,7 +72,13 @@ module.exports = {
                 else{
                     let blockchain = new Blockchain();
                     await blockchain.readChainData();
-                     let story = star.story;
+                    let story = star.story;
+                    
+                    //truncate to 250 words max
+                    let words = story.split(" ");
+                    if (words.length > 250)
+                     story = words.splice(0,250).join(" ");
+
                     let hexStory = module.exports.a2hex(story);
                     star.story = hexStory;
                     const block = {
@@ -103,7 +109,7 @@ module.exports = {
           
     },
 
-    
+     
     //http://stackoverflow.com/questions/3745666/how-to-convert-from-hex-to-ascii-in-javascript
 
     a2hex:function (str) {
