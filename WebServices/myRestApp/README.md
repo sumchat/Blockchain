@@ -1,4 +1,4 @@
-# my-rest-app
+# Build a Private Blockchain Notary Service
 
 a [Sails v1](https://sailsjs.com) application
 
