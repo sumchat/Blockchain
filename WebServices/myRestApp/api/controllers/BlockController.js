@@ -61,6 +61,7 @@ module.exports = {
 
                 if (!star.story)
                 emptyFields.push("story");
+                
            
                 if(emptyFields.length > 0)
                 {
@@ -68,32 +69,47 @@ module.exports = {
                     errorStr = "Request failed because no values were supplied for - " + missingfields;
                  return res.ok("error:" + errorStr );
                   
-                }
+                }                
                 else{
-                    let blockchain = new Blockchain();
-                    await blockchain.readChainData();
-                    let story = star.story;
-                    
-                    //truncate to 250 words max
-                    let words = story.split(" ");
-                    if (words.length > 250)
-                     story = words.splice(0,250).join(" ");
+                        let story = star.story;
+                        let isStoryAscii = module.exports.isASCII(story);
+                        if(!isStoryAscii)
+                        {
+                        return res.ok("error:Story cannot include any non ASCII characters");
+                        }
+                        else{
+                            let buff = Buffer.from(story, 'utf8');
 
-                    let hexStory = module.exports.a2hex(story);
-                    star.story = hexStory;
-                    const block = {
-                    body: {
-                      address,
-                      star
-                         }
-                     };
-                     await blockchain.addBlock(block);
-                     let blkheight = blockchain.getBlockHeight();
-                    let newblock = blockchain.getBlock(blkheight);
-                    BlockchainData.validated.pop(address); //user can request one star for each validation request
-                    delete BlockchainData.validationBlocks[address];
-                    return res.ok(newblock);
-                 }
+                            if (buff.length > 500)
+                             return res.ok("error:The size of the story exceeds 500 Bytes. Please reduce the length and try again");
+                            else{
+                                let blockchain = new Blockchain();
+                                await blockchain.readChainData();
+                                //let story = star.story;                    
+                                //truncate to 250 words max
+                                //let words = story.split(" ");
+                                //if (words.length > 250)
+                                // story = words.splice(0,250).join(" ");
+                                //let hexStory = module.exports.a2hex(story);
+                                //star.story = hexStory;
+                        
+                                star.story = buff.toString('hex');
+                                //console.log("length:"+ buff.length);
+                                const block = {
+                                    body: {
+                                    address,
+                                    star
+                                     }
+                                    };
+                                await blockchain.addBlock(block);
+                                let blkheight = blockchain.getBlockHeight();
+                                let newblock = blockchain.getBlock(blkheight);
+                                BlockchainData.validated.pop(address); //user can request one star for each validation request
+                                delete BlockchainData.validationBlocks[address];
+                                return res.ok(newblock);
+                                }
+                            }
+                    }
              }
            else{
             let respObj = {};
@@ -109,7 +125,12 @@ module.exports = {
           
     },
 
-     
+       // https://stackoverflow.com/a/14313213
+
+    isASCII:function(str) {
+        return /^[\x00-\x7F]*$/.test(str);
+    },
+
     //http://stackoverflow.com/questions/3745666/how-to-convert-from-hex-to-ascii-in-javascript
 
     a2hex:function (str) {

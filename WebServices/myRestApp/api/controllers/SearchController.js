@@ -31,7 +31,7 @@ module.exports = {
             let allblocks = blocks.map(block =>{
                     const {body, ...rest} = block;
                     
-                    body["star"]["storyDecoded"] = module.exports.hex2a(body["star"]["story"]);
+                    body["star"]["storyDecoded"] = module.exports.hexBuf2a(block["body"]["star"]["story"]);//module.exports.hex2a(body["star"]["story"]);
                     return {
                        ...rest,
                        body,
@@ -61,7 +61,7 @@ module.exports = {
              let allblocks = blocks.map(block =>{
                  const {body, ...rest} = block;
                 
-                 body["star"]["storyDecoded"] = module.exports.hex2a(body["star"]["story"]);
+                 body["star"]["storyDecoded"] = module.exports.hexBuf2a(block["body"]["star"]["story"]);//module.exports.hex2a(body["star"]["story"]);
                  return {
                     ...rest,
                     body,
@@ -87,7 +87,9 @@ module.exports = {
            if(blockheight < blockchain.chain.length)
             {
                 block = blockchain.chain[blockheight];
-                block["body"]["star"]["storyDecoded"] = module.exports.hex2a(block["body"]["star"]["story"]);
+                //let buff1 = new Buffer(block["body"]["star"]["story"], 'hex');
+                //let decoded = buff1.toString('utf8');
+                block["body"]["star"]["storyDecoded"] = module.exports.hexBuf2a(block["body"]["star"]["story"]);//module.exports.hex2a(block["body"]["star"]["story"]);
                 return res.ok(block);
             }
             else
@@ -100,6 +102,12 @@ module.exports = {
         {
          return res.serverError(error);
         }  
+     },
+
+     hexBuf2a:function(hexx){
+        let buff1 = new Buffer(hexx, 'hex');
+        let decoded = buff1.toString('utf8');
+        return decoded;
      },
      
      hex2a:function(hexx) {
