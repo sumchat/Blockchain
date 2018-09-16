@@ -30,7 +30,7 @@ module.exports = {
                 });   
             let allblocks = blocks.map(block =>{
                     const {body, ...rest} = block;
-                    console.log("story.." + body["star"]["story"]);
+                    
                     body["star"]["storyDecoded"] = module.exports.hex2a(body["star"]["story"]);
                     return {
                        ...rest,
@@ -60,7 +60,7 @@ module.exports = {
                 });                 
              let allblocks = blocks.map(block =>{
                  const {body, ...rest} = block;
-                 console.log("story.." + body["star"]["story"]);
+                
                  body["star"]["storyDecoded"] = module.exports.hex2a(body["star"]["story"]);
                  return {
                     ...rest,
