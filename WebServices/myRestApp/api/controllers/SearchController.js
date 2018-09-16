@@ -30,8 +30,8 @@ module.exports = {
                 });   
             let allblocks = blocks.map(block =>{
                     const {body, ...rest} = block;
-                    
-                    body["star"]["storyDecoded"] = module.exports.hexBuf2a(block["body"]["star"]["story"]);//module.exports.hex2a(body["star"]["story"]);
+                    if (body)
+                        body["star"]["storyDecoded"] = module.exports.hexBuf2a(block["body"]["star"]["story"]);//module.exports.hex2a(body["star"]["story"]);
                     return {
                        ...rest,
                        body,
@@ -57,11 +57,12 @@ module.exports = {
             
              blocks = blockchain.chain.filter(block => {
                     return block.hash === blockhash;
-                });                 
+                });    
+
              let allblocks = blocks.map(block =>{
                  const {body, ...rest} = block;
-                
-                 body["star"]["storyDecoded"] = module.exports.hexBuf2a(block["body"]["star"]["story"]);//module.exports.hex2a(body["star"]["story"]);
+                if(body)
+                  body["star"]["storyDecoded"] = module.exports.hexBuf2a(block["body"]["star"]["story"]);//module.exports.hex2a(body["star"]["story"]);
                  return {
                     ...rest,
                     body,
@@ -89,7 +90,8 @@ module.exports = {
                 block = blockchain.chain[blockheight];
                 //let buff1 = new Buffer(block["body"]["star"]["story"], 'hex');
                 //let decoded = buff1.toString('utf8');
-                block["body"]["star"]["storyDecoded"] = module.exports.hexBuf2a(block["body"]["star"]["story"]);//module.exports.hex2a(block["body"]["star"]["story"]);
+                if(blockheight > 0)
+                    block["body"]["star"]["storyDecoded"] = module.exports.hexBuf2a(block["body"]["star"]["story"]);//module.exports.hex2a(block["body"]["star"]["story"]);
                 return res.ok(block);
             }
             else
