@@ -1,0 +1,15 @@
+Star Notary Contract Address:
+
+
+"address": "0xae64f81528f5a9bc36f815eef8b72e759cf5853e",
+"transactionHash": "0x460112fc9b86f7a5bf548ded2117d630efedf3e7213df3ac079db2f788baf681"
+
+TX hash for PutUpStarForSale
+
+TxHash:0xcc5ff345ed790bc3d51141556d9d3ff069f50dbd9930e958fcfd6d8f1fe055b8
+
+TX hash for CreateStar
+
+TxHash:0x12ce254ea206804103367f2a4c469227733338dc8290c680bda9b23b43cc0f71
+
+TokenId:1
